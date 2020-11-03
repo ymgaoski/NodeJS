@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>socket io</title>
+  <!-- 在NODEJS中可以直接使用以下方式引入，有做路径映射 -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- 使用CDN地址 -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+  <script>
+    // 不指定地址与端口就取当前URL
+    const socket = io('http://localhost:8888');
+    
+    // 连接成功
+    socket.on('connect', () => {
+      console.log('连接服务器成功.');
+      
+      socket.emit('test','hello server');
+    })
+    
+    // 连接失败后，2秒重连
+    socket.on('connect_error', () => {
+      setTimeout(() => {
+        socket.connect();
+      }, 2000);
+    });
+
+    // 连接断开
+    socket.on('disconnect', () => {
+        console.log('与服务器断开连接.');
+    });
+
+    // 收到服务端消息
+    socket.on('message', data => {
+      console.log(data.toString(),'---来自服务端消息');
+    })
+
+    // 监听服务端自定义事件
+    socket.on('serverEvent', data => {
+      console.log(data.toString(),'---服务端的自定义事件');
+
+      // 发送自定义事件到服务端
+      socket.emit('clientEvent', {name: 'xgao', age: 20});
+    })
+  </script>
+</head>
+<body>
+  <h1>socket.io 测试</h1>
+</body>
+</html>

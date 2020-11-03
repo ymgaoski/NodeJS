@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script>
+      $(function(){
+
+        // 获取数据
+        $.get('/user',function(res){
+          console.log('user:',res);
+          $('#user').text(JSON.stringify(res));
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <h3>I'm index.</h3>
+    <h3>欢迎来到 NodeJS 世界！</h3>
+    <img src="img/1.png" alt=""/>
+    <img src="img/2.png" alt=""/>
+
+    <div id="user"></div>
+  </body>
+</html>
