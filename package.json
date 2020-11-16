@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ioredis": "^4.19.2",
+    "mongoose": "^5.10.14",
+    "mysql": "^2.18.1",
+    "socket.io": "^3.0.1",
+    "uuid": "^8.3.1"
+  }
 }
