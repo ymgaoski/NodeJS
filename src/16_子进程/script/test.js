@@ -1,0 +1,1 @@
+console.log('这是 test.js 文件.');

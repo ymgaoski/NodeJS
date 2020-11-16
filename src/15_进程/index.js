@@ -52,6 +52,7 @@ console.log('env：',process.env);
 console.log('memoryUsage()：',process.memoryUsage());
 
 // 当前运行文件的目录
+// __dirname 相同结果
 console.log('cwd()：',process.cwd());
 
 // 切换运行目录
@@ -69,7 +70,10 @@ let cid = setInterval(() => {
     }
 }, 1000);
 
-
+// 同步之后，异步之前 执行，下一次事件循环执行
+process.nextTick(() => {
+  console.log('this nextTick.');
+})
 
 // ----------- 常用事件
 
