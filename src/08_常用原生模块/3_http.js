@@ -6,7 +6,7 @@ const server = http.createServer(function(request,response){
   
   let data = '';
 
-  // 当数据比较大时，数据会被多次传输过来，好像并没有触发
+  // 请求数据组装，Body有数据才会进入该事件，一般POST才会有Body数据，GET请求不会进入
   request.on('data', chunk => {
     console.log('chunk:',chunk);
     data += chunk;

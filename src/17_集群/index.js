@@ -40,7 +40,7 @@ if(cluster.isWorker){
   // 创建HTTP服务
   const server = http.createServer((request,response) => {
 
-    // 请求数据组装，Body有数据才会进入该事件，一般POST才会有Body数据，GET请求一般不会进入
+    // 请求数据组装，Body有数据才会进入该事件，一般POST才会有Body数据，GET请求不会进入
     let data='';
     request.on('data', chunk => {
       data += chunk;
