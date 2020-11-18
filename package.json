@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pull": "git pull origin master",
-    "push": "git add . && git push origin master"
+    "push": "git add . && git commit -m 初始化 && git push origin master"
   },
   "author": "",
   "license": "ISC",
