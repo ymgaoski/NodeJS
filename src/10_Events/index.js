@@ -16,7 +16,6 @@ const requestEvent = (request,response) => {
   console.log(request.url,'---请求地址');
 
   response.statusCode = 200;
-  response.end('1111111','utf8');
 }
 
 // 添加事件监听
@@ -27,7 +26,6 @@ server.addListener('request',(request,response) => {
   console.log(request.url,'---请求地址2');
 
   response.statusCode = 200;
-  response.end('222222','utf8');
 })
 
 // on是 addListener 方法的别名 
