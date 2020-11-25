@@ -6,15 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pull": "git pull origin master",
-    "push": "git add . && git commit -m 初始化 && git push origin master"
+    "push": "git add . && git commit -m 初始化 && git push origin master",
+    "koa2Server": "node src/19_Koa中间层/scripts/server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/router": "^10.0.0",
+    "axios": "^0.21.0",
     "ioredis": "^4.19.2",
+    "jsonfile": "^6.1.0",
     "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-combine-routers": "^4.0.2",
+    "koa-compress": "^5.0.1",
+    "koa-static": "^5.0.0",
     "mongoose": "^5.10.14",
     "mysql": "^2.18.1",
+    "qs": "^6.9.4",
     "socket.io": "^3.0.1",
     "uuid": "^8.3.1"
   }
