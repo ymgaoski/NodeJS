@@ -16,14 +16,14 @@ exports.doRequest = function(url,method,params){
 
     if ('GET' === method){
         return axios({
-            baseUrl: hostBaseUrl,
+            baseURL: hostBaseUrl,
             url: url,
             method: method,
             params: params
         });
     }else if ('PUT' === method || 'POST' === method || 'DELETE' === method) {
         return axios({
-            baseUrl: hostBaseUrl,
+            baseURL: hostBaseUrl,
             url: url,
             method: method,
             data: params
