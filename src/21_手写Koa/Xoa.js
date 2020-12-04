@@ -1,5 +1,7 @@
 const http = require('http');
 const context = require('./context');
+const request = require('./request');
+const response = require('./response');
 
 class Xoa{
 
@@ -42,8 +44,8 @@ class Xoa{
 
     // Object.create 创建对象并指定原型
     const ctx = Object.create(context);
-    ctx.request = Object.create(req);
-    ctx.response = Object.create(res);
+    ctx.request = Object.create(request);
+    ctx.response = Object.create(response);
     
     ctx.req = ctx.request.req = req;
     ctx.res = ctx.request.res = res;
