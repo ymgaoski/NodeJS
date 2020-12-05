@@ -51,64 +51,27 @@ const dynamicFn = dynamicCompose(sum,square,addSelf);
 console.log(dynamicFn(1,2),'【同步】不限函数个数');
 
 
-// -------- 函数组合方法，不限函数个数，异步
+//-------- 函数组合方法，不限函数个数，异步，实现洋葱模型调用
 
-async function asyncSum(x,y){
-  return x + y;
-}
-
-async function asyncSquare(z){
-  return z * z;
-}
-
-async function asyncAddSelf(x){
-  return x + 1;
-}
-
-// function asyncDynamicCompose(...[frist,...other]){
-//   return function(...args){
-    
-//     let result = frist(...args);
-//     other.forEach(fn => {
-//       result = fn(result);
-//     })
-//     return result;
-//   }
-// }
-
-// let asyncDynamicFn = asyncDynamicCompose(asyncSum,asyncSquare,asyncAddSelf);
-
-// console.log(asyncDynamicFn(1,2),'【异步】不限函数个数');
-
-
-// let asyncSum = function(a,b){
-//   return new Promise((resolve,fail) => {
-//     resolve(a + b);
-//   })
-// }
-
-// asyncSum(1,2).then((res) => {
-//   console.log(res,'asyncSum');
-// })
-
-
-
-function asyncDynamicCompose(middlewares){
+const asyncDynamicCompose = function(middlewares){
+  // return function只是为了将外层可以延迟调用，不然 return dispatch 就直接执行了
   return function(){
-      return dispatch(0)
+   return dispatch(0); 
   }
-}
 
-function dispatch(i){
-    let fn = middlewares[i]
-    if(!fn){
-        return Promise.resolve()
+  // 分发函数
+  function dispatch(i){
+    const fn = middlewares[i];
+    // 函数不存在就直接返回一个无参Promise对象
+    if (!fn){
+      return Promise.resolve();
     }
-    return Promise.resolve(
-        fn(function next(){
-            return dispatch(i + 1)
-        })
-    )
+
+    // 会先执行 fn 函数
+    return Promise.resolve(fn(function next(){
+      return dispatch(i+1);
+    }))
+  }
 }
 
 async function fn1(next){
@@ -128,12 +91,13 @@ function fn3(next){
   console.log('fn3')
 }
 
+// 模拟延迟加载
 function delay(){
   return Promise.resolve(res => {
       setTimeout(() => reslove(),2000)
   })
 }
 
-const middlewares = [fn1,fn2,fn3]
-const finalFn = asyncDynamicCompose(middlewares)
+// 调用
+const finalFn = asyncDynamicCompose([fn1,fn2,fn3])
 finalFn()
