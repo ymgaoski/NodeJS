@@ -1,3 +1,4 @@
+// 上下文
 module.exports = {
   get url(){
     return this.request.url;
